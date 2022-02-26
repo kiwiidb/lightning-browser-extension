@@ -92,6 +92,9 @@ class Eclair implements Connector {
     };
   }
 
+  async sendPaymentOffer(args: SendPaymentArgs): Promise<SendPaymentResponse> {
+    throw new Error("not supported");
+  }
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
     const data = await this.request("/getreceivedinfo", {
       paymentHash: args.paymentHash,

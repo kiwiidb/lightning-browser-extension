@@ -99,7 +99,9 @@ class LnBits implements Connector {
         return { error: e.message };
       });
   }
-
+  async sendPaymentOffer(args: SendPaymentArgs): Promise<SendPaymentResponse> {
+    throw new Error("not supported");
+  }
   async checkPayment(args: CheckPaymentArgs): Promise<CheckPaymentResponse> {
     const data = await this.request(
       "GET",
