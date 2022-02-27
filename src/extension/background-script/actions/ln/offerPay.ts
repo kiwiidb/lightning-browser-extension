@@ -11,6 +11,7 @@ export default async function offerPay(message: Message) {
 
   const connector = await state.getState().getConnector();
 
+  console.log(offerString);
   const response = await connector.sendPaymentOffer({
     offer: offerString,
     amt: valueSat,

@@ -136,6 +136,7 @@ export default class LndHub implements Connector {
     };
   }
   async sendPaymentOffer(args: SendPaymentArgs): Promise<SendPaymentResponse> {
+    console.log(args);
     const data = await this.request<{
       error?: string;
       message: string;
