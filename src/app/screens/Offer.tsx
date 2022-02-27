@@ -94,8 +94,7 @@ function Offer(props: Props) {
         }
       );
 
-
-        setSuccessAction({ tag: "message", message: "Maybe success or not, who knows" });
+        setSuccessAction({ tag: "message", message: `Offer paid! Preimage: ${payment.preimage}` });
 
       auth.fetchAccountInfo(); // Update balance.
     } catch (e) {
