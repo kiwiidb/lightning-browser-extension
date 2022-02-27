@@ -139,7 +139,7 @@ function Offer(props: Props) {
 
   function getRecipient() {
     if (!details?.vendor) return;
-    return details.nodeId;
+    return details.node_id;
   }
 
   function renderAmount(details: DecodedOffer) {
