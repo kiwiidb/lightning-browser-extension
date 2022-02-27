@@ -12,9 +12,9 @@ export default async function offerPay(message: Message) {
   const connector = await state.getState().getConnector();
 
   const response = await connector.sendPaymentOffer({
-    offerString,
-    valueSat,
-    comment
+    offer: offerString,
+    amt: valueSat,
+    memo: comment
   });
   utils.publishPaymentNotification(message, "", response);
   return response;
