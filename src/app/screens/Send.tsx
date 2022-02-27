@@ -8,6 +8,7 @@ import {
 import { parsePaymentRequest } from "invoices";
 
 import lnurlLib from "../../common/lib/lnurl";
+import offerLib from "../../common/lib/bolt12";
 
 import Button from "../components/Button";
 import IconButton from "../components/IconButton";
@@ -29,11 +30,13 @@ function Send() {
       if (!lnurl && lnurlLib.isLightningAddress(invoice)) {
         lnurl = invoice;
       }
-
       if (lnurl) {
         await lnurlLib.getDetails(lnurl); // throws if invalid.
         navigate(`/lnurlPay?lnurl=${lnurl}`);
-      } else {
+      } else if (offerLib.isOffer(invoice)) {
+        navigate(`/payOffer?offer=${offer}`);
+      }
+      else {
         parsePaymentRequest({ request: invoice }); // throws if invalid.
         navigate(`/confirmPayment?paymentRequest=${invoice}`);
       }

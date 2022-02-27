@@ -158,3 +158,24 @@ export interface SettingsStorage {
   websiteEnhancements: boolean;
   userName: string;
 }
+export interface DecodedOffer {
+  type: string;
+  offer_id: string;
+  chains: any[];
+  description: string;
+  node_id: string;
+  signature: string;
+  vendor: string;
+  valid: boolean;
+  amount_msat: string;
+  features: string;
+  payer_key: string;
+  payer_info: string;
+  payer_note: string;
+  timestamp: number;
+  created_at: number;
+  payment_hash: string;
+  relative_expiry: number;
+  min_final_cltv_expiry: number;
+  encoded: string;
+}
