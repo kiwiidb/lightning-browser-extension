@@ -138,7 +138,7 @@ function Offer(props: Props) {
   }
 
   function getRecipient() {
-    if (!details?.vendor) return;
+    if (!details?.node_id) return;
     return details.node_id;
   }
 
