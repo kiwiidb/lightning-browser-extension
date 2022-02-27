@@ -82,7 +82,7 @@ function battery(): void {
       if (
         (match = (userData.element.textContent || "").match(/lno(\S+)/i))
       ) {
-        recipient = match[1];
+        recipient = match[0];
       } else {
         // if we did not find anything let's look for an ⚡ emoji
         const zapElements = userData.element.querySelectorAll(
