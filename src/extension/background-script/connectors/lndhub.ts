@@ -136,10 +136,9 @@ export default class LndHub implements Connector {
     };
   }
   async sendPaymentOffer(args: SendPaymentArgs): Promise<SendPaymentResponse> {
-    console.log(args);
     const data = await this.request<{
       error?: string;
-      message: string;
+      message?: string;
       payment_error?: string;
       payment_hash:
         | {
@@ -180,17 +179,6 @@ export default class LndHub implements Connector {
       );
     }
 
-    // HACK!
-    // some Lnbits extension that implement the LNDHub API do not return the route information.
-    // to somewhat work around this we set a payment route and use the amount from the payment request.
-    // lnbits needs to fix this and return proper route information with a total amount and fees
-    if (!data.payment_route) {
-      const paymentRequestDetails = parsePaymentRequest({
-        request: args.paymentRequest,
-      });
-      const amountInSats = paymentRequestDetails.tokens;
-      data.payment_route = { total_amt: amountInSats, total_fees: 0 };
-    }
     return {
       data: {
         preimage: data.payment_preimage as string,
