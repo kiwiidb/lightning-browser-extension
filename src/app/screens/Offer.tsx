@@ -29,7 +29,7 @@ type Props = {
   origin?: Origin;
 };
 
-function LNURLPay(props: Props) {
+function Offer(props: Props) {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const auth = useAuth();
