@@ -6,6 +6,7 @@ import signMessage from "./signMessage";
 import getInfo from "./getInfo";
 import makeInvoice from "./makeInvoice";
 import verifyMessage from "./verifyMessage";
+import offerPay from "./offerPay";
 
 const connectorCall = (method) => {
   return async (message, sender) => {
@@ -41,4 +42,5 @@ export {
   signMessage,
   makeInvoice,
   verifyMessage,
+  offerPay
 };

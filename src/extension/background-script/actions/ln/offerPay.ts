@@ -7,14 +7,14 @@ import utils from "../../../../common/lib/utils";
 
 export default async function offerPay(message: Message) {
   PubSub.publish(`ln.offerPay.start`, message);
-  const { offer, amt, memo } = message.args;
+  const { offerString, valueSat, comment } = message.args;
 
   const connector = await state.getState().getConnector();
 
   const response = await connector.sendPaymentOffer({
-    offer,
-    amt,
-    memo
+    offerString,
+    valueSat,
+    comment
   });
   utils.publishPaymentNotification(message, "", response);
   return response;
