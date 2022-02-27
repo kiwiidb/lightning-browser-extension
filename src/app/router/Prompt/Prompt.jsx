@@ -11,6 +11,7 @@ import ConfirmSignMessage from "../../screens/ConfirmSignMessage";
 import ConfirmPayment from "../../screens/ConfirmPayment";
 import LNURLPay from "../../screens/LNURLPay";
 import LNURLAuth from "../../screens/LNURLAuth";
+import Offer from "../../screens/Offer";
 
 class Prompt extends Component {
   constructor(props) {
@@ -53,6 +54,15 @@ class Prompt extends Component {
                 element={
                   <LNURLPay
                     details={this.state.args?.lnurlDetails}
+                    origin={this.state.origin}
+                  />
+                }
+              />
+                <Route
+                path="payOffer"
+                element={
+                  <Offer
+                    details={this.state.args?.offerDetails}
                     origin={this.state.origin}
                   />
                 }
