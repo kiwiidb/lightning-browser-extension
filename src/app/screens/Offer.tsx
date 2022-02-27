@@ -11,7 +11,6 @@ import api from "../../common/lib/api";
 import msg from "../../common/lib/msg";
 import utils from "../../common/lib/utils";
 import lnurl from "../../common/lib/lnurl";
-import bolt12 from "../../common/lib/bolt12";
 import getOriginData from "../../extension/content-script/originData";
 import { useAuth } from "../context/AuthContext";
 
