@@ -94,24 +94,8 @@ function Offer(props: Props) {
         }
       );
 
-      // Once payment is fulfilled LN WALLET executes a non-null successAction
-      // LN WALLET should also store successAction data on the transaction record
-      if (paymentInfo.successAction && !payment.payment_error) {
-        switch (paymentInfo.successAction.tag) {
-          case "url":
-          case "message":
-            setSuccessAction(paymentInfo.successAction);
-            break;
-          case "aes": // TODO: For aes, LN WALLET must attempt to decrypt a ciphertext with payment preimage
-          default:
-            alert(
-              `Not implemented yet. Please submit an issue to support success action: ${paymentInfo.successAction.tag}`
-            );
-            break;
-        }
-      } else {
-        setSuccessAction({ tag: "message", message: "Success, payment sent!" });
-      }
+
+        setSuccessAction({ tag: "message", message: "Maybe success or not, who knows" });
 
       auth.fetchAccountInfo(); // Update balance.
     } catch (e) {
