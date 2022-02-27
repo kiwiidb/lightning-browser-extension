@@ -14,7 +14,7 @@ export default async function offerPay(message: Message) {
   console.log(offerString);
   const response = await connector.sendPaymentOffer({
     offer: offerString,
-    amt: valueSat,
+    amt: parseInt(valueSat),
     memo: comment
   });
   utils.publishPaymentNotification(message, "", response);
