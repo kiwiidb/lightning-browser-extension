@@ -93,8 +93,9 @@ function Offer(props: Props) {
           },
         }
       );
+      console.log(payment);
 
-        setSuccessAction({ tag: "message", message: `Offer paid! Preimage: ${payment.preimage}` });
+      setSuccessAction({ tag: "message", message: `Offer paid! Preimage: ${payment.preimage}` });
 
       auth.fetchAccountInfo(); // Update balance.
     } catch (e) {
