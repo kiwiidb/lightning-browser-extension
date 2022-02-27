@@ -79,17 +79,13 @@ function Offer(props: Props) {
 
   async function confirm() {
     if (!details) return;
-
-    const payerdata =
-      details.payerData && details.payerData.name && userName && userName.length
-        ? { name: userName }
-        : undefined;
+    const offerString = searchParams.get("offer");
 
     try {
       setLoadingConfirm(true);
       const payment = await utils.call(
         "offerPay",
-        { offer, amount, comment },
+        { offerString , valueSat, comment },
         {
           origin: {
             ...origin,
@@ -240,7 +236,7 @@ function Offer(props: Props) {
       "Amount (Satoshi)",
       renderAmount(details),
     ]);
-    if (details?.commentAllowed > 0) {
+    if (true) {
       elements.push(["Comment", renderComment()]);
     }
     if (details?.payerData?.name) {
