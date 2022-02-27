@@ -18,6 +18,7 @@ import Settings from "../../screens/Settings";
 import Unlock from "../../screens/Unlock";
 import ChooseConnector from "../../screens/Onboard/ChooseConnector";
 import Accounts from "../../screens/Accounts";
+import Offer from "../../screens/Offer";
 
 function Options() {
   return (
@@ -40,6 +41,7 @@ function Options() {
             <Route path="send" element={<Send />} />
             <Route path="receive" element={<Receive />} />
             <Route path="lnurlPay" element={<LNURLPay />} />
+            <Route path="payOffer" element={<Offer />} />
             <Route path="confirmPayment" element={<ConfirmPayment />} />
             <Route path="settings" element={<Settings />} />
             <Route path="accounts">
