@@ -4,16 +4,15 @@ import Hex from "crypto-js/enc-hex";
 import { parsePaymentRequest } from "invoices";
 
 import { DecodedOffer } from "../../types";
-
+const findOffer = (text: string) => {
+  const stringToText = text.trim();
+  let match;
+  if ((match = stringToText.match(/^lno.*/i))) {
+    return match[1];
+  }
+  return null;
+}
 const bolt12 = {
-  findOffer(text: string) {
-    const stringToText = text.trim();
-    let match;
-    if ((match = stringToText.match(/^lno.*/i))) {
-      return match[1];
-    }
-    return null;
-  },
   isOffer(offer: string) {
     return Boolean(findOffer(Offer));
   },
