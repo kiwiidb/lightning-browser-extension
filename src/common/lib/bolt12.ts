@@ -6,9 +6,6 @@ import { parsePaymentRequest } from "invoices";
 import { DecodedOffer } from "../../types";
 
 const bolt12 = {
-  isOffer(offer: string) {
-    return Boolean(findOffer(Offer));
-  },
   findOffer(text: string) {
     const stringToText = text.trim();
     let match;
@@ -16,6 +13,9 @@ const bolt12 = {
       return match[1];
     }
     return null;
+  },
+  isOffer(offer: string) {
+    return Boolean(findOffer(Offer));
   },
   async decodeOffer(offer: string) {
     
