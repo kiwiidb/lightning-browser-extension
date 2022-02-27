@@ -12,6 +12,7 @@ import ConfirmPayment from "../../screens/ConfirmPayment";
 import { AuthProvider } from "../../context/AuthContext";
 import RequireAuth from "../RequireAuth";
 import Navbar from "../../components/Navbar";
+import Offer from "../../screens/Offer";
 
 const POPUP_MAX_HEIGHT = 600;
 
@@ -32,6 +33,8 @@ function Popup() {
             <Route path="send" element={<Send />} />
             <Route path="receive" element={<Receive />} />
             <Route path="lnurlPay" element={<LNURLPay />} />
+            <Route path="payOffer" element={<Offer />} />
+
             <Route path="confirmPayment" element={<ConfirmPayment />} />
           </Route>
           <Route path="unlock" element={<Unlock />} />
