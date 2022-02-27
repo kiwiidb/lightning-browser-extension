@@ -139,7 +139,7 @@ function Offer(props: Props) {
 
   function getRecipient() {
     if (!details?.vendor) return;
-    return details.vendor;
+    return details.nodeId;
   }
 
   function renderAmount(details: DecodedOffer) {
@@ -235,7 +235,7 @@ function Offer(props: Props) {
       ];
     const elements = [];
     elements.push(["Send payment to", getRecipient()]);
-    elements.push(details.description);
+    elements.push(["Description: ", details.description]);
     elements.push([
       "Amount (Satoshi)",
       renderAmount(details),
