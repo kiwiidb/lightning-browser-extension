@@ -80,7 +80,7 @@ function battery(): void {
       let recipient;
       // extract lnurlp: from the description text
       if (
-        (match = (userData.element.textContent || "").match(/lnurlp:(\S+)/i))
+        (match = (userData.element.textContent || "").match(/lno(\S+)/i))
       ) {
         recipient = match[1];
       } else {
@@ -118,7 +118,7 @@ function battery(): void {
 
       setLightningData([
         {
-          method: "lnurl",
+          method: "lnoffer",
           recipient,
           ...getOriginData(),
           icon: userData.imageUrl,

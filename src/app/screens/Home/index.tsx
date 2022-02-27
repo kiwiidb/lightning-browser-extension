@@ -253,7 +253,7 @@ function Home() {
                   icon: lnData[0].icon,
                 };
                 navigate(
-                  `/lnurlPay?lnurl=${
+                  `/payOffer?offer=${
                     lnData[0].recipient
                   }&origin=${encodeURIComponent(JSON.stringify(origin))}`
                 );
