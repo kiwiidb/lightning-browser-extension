@@ -59,6 +59,7 @@ function Offer(props: Props) {
       if (offerString) {
         bolt12.decodeOffer(offerString).then((offerDetails) => {
          setDetails(offerDetails);
+         setLoading(false);
         });
       } else {
         setLoading(false);
