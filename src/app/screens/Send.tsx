@@ -34,7 +34,7 @@ function Send() {
         await lnurlLib.getDetails(lnurl); // throws if invalid.
         navigate(`/lnurlPay?lnurl=${lnurl}`);
       } else if (offerLib.isOffer(invoice)) {
-        navigate(`/payOffer?offer=${offer}`);
+        navigate(`/payOffer?offer=${invoice}`);
       }
       else {
         parsePaymentRequest({ request: invoice }); // throws if invalid.
