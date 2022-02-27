@@ -14,7 +14,7 @@ const findOffer = (text: string) => {
 }
 const bolt12 = {
   isOffer(offer: string) {
-    return Boolean(findOffer(Offer));
+    return Boolean(findOffer(offer));
   },
   async decodeOffer(offer: string) {
     
