@@ -18,6 +18,7 @@ import Button from "../components/Button";
 import Input from "../components/Form/Input";
 import PublisherCard from "../components/PublisherCard";
 import bolt12 from "../../common/lib/bolt12";
+import { DecodedOffer } from "../../types";
 
 type Origin = {
   name: string;
@@ -25,7 +26,7 @@ type Origin = {
 };
 
 type Props = {
-  details?: LNURLPayServiceResponse;
+  details?: DecodedOffer;
   origin?: Origin;
 };
 
@@ -57,7 +58,7 @@ function Offer(props: Props) {
       const offerString = searchParams.get("offer");
       if (offerString) {
         bolt12.decodeOffer(offerString).then((offerDetails) => {
-         console.print(offerDetails);
+         setDetails(offerDetails);
         });
       } else {
         setLoading(false);
@@ -85,35 +86,9 @@ function Offer(props: Props) {
 
     try {
       setLoadingConfirm(true);
-      // Get the invoice
-      const params = {
-        amount: parseInt(valueSat) * 1000, // user specified sum in MilliSatoshi
-        comment, // https://github.com/fiatjaf/lnurl-rfc/blob/luds/12.md
-        payerdata, // https://github.com/fiatjaf/lnurl-rfc/blob/luds/18.md
-      };
-      const { data: paymentInfo } = await axios.get<LNURLPaymentInfo>(
-        details.callback,
-        {
-          params,
-        }
-      );
-      const { pr: paymentRequest } = paymentInfo;
-
-      const isValidInvoice = lnurl.verifyInvoice({
-        paymentInfo,
-        metadata: details.metadata,
-        amount: parseInt(valueSat) * 1000,
-        payerdata,
-      });
-      if (!isValidInvoice) {
-        alert("Payment aborted. Invalid invoice");
-        return;
-      }
-
-      // LN WALLET pays the invoice, no additional user confirmation is required at this point
       const payment = await utils.call(
-        "lnurlPay",
-        { paymentRequest },
+        "offerPay",
+        { offer, amount, comment },
         {
           origin: {
             ...origin,
@@ -162,29 +137,17 @@ function Offer(props: Props) {
   }
 
   function getRecipient() {
-    if (!details?.metadata) return;
-    try {
-      const metadata = JSON.parse(details.metadata);
-      const identifier = metadata.find(
-        ([type]: [string]) => type === "text/identifier"
-      );
-      if (identifier) return identifier[1];
-    } catch (e) {
-      console.error(e);
-    }
-    return details.domain;
+    if (!details?.vendor) return;
+    return details.vendor;
   }
 
-  function renderAmount(minSendable: number, maxSendable: number) {
-    if (minSendable === maxSendable) {
-      return <p>{`${+minSendable / 1000} sat`}</p>;
-    } else {
+  function renderAmount(details: DecodedOffer) {
       return (
         <div className="mt-1 flex flex-col">
           <Input
             type="number"
-            min={+minSendable / 1000}
-            max={+maxSendable / 1000}
+            min={+0 / 1000}
+            max={+1000000 / 1000}
             value={valueSat}
             onChange={(e) => setValueSat(e.target.value)}
           />
@@ -212,7 +175,6 @@ function Offer(props: Props) {
           </div>
         </div>
       );
-    }
   }
 
   function renderComment() {
@@ -272,10 +234,10 @@ function Offer(props: Props) {
       ];
     const elements = [];
     elements.push(["Send payment to", getRecipient()]);
-    elements.push(...formattedMetadata(details.metadata));
+    elements.push(details.description);
     elements.push([
       "Amount (Satoshi)",
-      renderAmount(details.minSendable, details.maxSendable),
+      renderAmount(details),
     ]);
     if (details?.commentAllowed > 0) {
       elements.push(["Comment", renderComment()]);
